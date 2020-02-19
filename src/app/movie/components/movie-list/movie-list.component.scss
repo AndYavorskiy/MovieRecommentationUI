@@ -1,0 +1,15 @@
+.movie-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  .card-wrapper {
+    width: 20%;
+  }
+  .example-card {
+    margin: 5px;
+
+    &:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+  }
+}

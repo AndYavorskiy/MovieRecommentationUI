@@ -1,6 +1,7 @@
 export class MovieModel {
+    id: string;
     title: string;
     overview: string;
-    budget: string;
+    budget: number;
     posterUrl: string;
 }

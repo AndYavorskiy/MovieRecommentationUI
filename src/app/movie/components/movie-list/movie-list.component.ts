@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MovieService } from '../../services';
+import { MovieModel } from '../../models';
+
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieListComponent implements OnInit {
 
-  constructor() { }
+  private pageIndex = 0;
+  private pageSize = 10;
 
-  ngOnInit(): void {
+  public movies: MovieModel[] = [];
+
+  constructor(private readonly movieService: MovieService) { }
+
+  ngOnInit() {
+    this.movieService
+      .search(this.pageIndex, this.pageSize)
+      .subscribe(data => this.movies = data);
   }
-
 }

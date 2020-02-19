@@ -1,1 +1,61 @@
-<p>movie-details works!</p>
+<div class="details-background">
+    <img class="poster" [src]="movie.posterUrl" [alt]="movie.title">
+
+    <div class="movie-info">
+        <div class="title">
+            {{movie.title}}
+        </div>
+
+        <div class="description">
+            <div>
+                <span> Release date: </span>
+                <span> 2012 </span>
+            </div>
+
+            <div>
+                <span> Rating: </span>
+                <span> 7.5 </span>
+                <span> 1.125 votes </span>
+            </div>
+
+            <div>
+                <span> Movie time: </span>
+                <span> 1h 30m </span>
+            </div>
+
+            <div>
+                <span> Company: </span>
+                <span> Pixar Animation Studios </span>
+            </div>
+
+            <div>
+                <span> Ganers: </span>
+                <span> Triller, Action, Family </span>
+            </div>
+
+            <div>
+                <span> Overview: </span>
+                <div> {{movie.overview}} </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="recommendations-container ">
+    <h2>
+        Recommendations
+    </h2>
+
+    <div class="recommendations-list ">
+        <div class="card-wrapper" *ngFor="let recommendation of recommendations">
+            <mat-card class="example-card" [routerLink]="['/movies', recommendation.id]">
+
+                <img mat-card-image [src]="recommendation.posterUrl" [alt]="recommendation.title">
+
+                <div [title]="recommendation.title">
+                    {{recommendation.title}}
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+.recommendations-container {
+  margin: 20px;
+
+  .recommendations-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .card-wrapper {
+      width: 12.5%;
+    }
+
+    .example-card {
+      margin: 5px;
+
+      &:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.details-background {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+
+  .poster {
+    width: 300px;
+  }
+
+  .movie-info {
+    width: 400px;
+    margin-top: 10px;
+
+    .title {
+      font-size: 1.7em;
+      line-height: 2.5em;
+      font-weight: bold;
+      color: #3f51b5;
+    }
+
+    .description {
+      font-size: 1.1em;
+
+      div > span:first-child {
+        font-weight: bold;
+        line-height: 2em;
+      }
+    }
+  }
+}
