@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MovieModule } from './movie/movie.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from 'src/shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
