@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  baseApiUrl: 'http://aac-vm.universe.dart.spb:8080/'
+  baseApiUrl: 'http://localhost:63558'
 };

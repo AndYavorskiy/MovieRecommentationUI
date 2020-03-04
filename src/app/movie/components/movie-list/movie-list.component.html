@@ -2,7 +2,7 @@
     <div class="card-wrapper" *ngFor="let movie of movies" [routerLink]="['.', movie.id]">
         <mat-card class="example-card" [routerLink]="['/movies', movie.id]">
 
-            <img mat-card-image [src]="movie.posterUrl" [alt]="movie.title">
+            <img mat-card-image [src]="movie.posterPath" [alt]="movie.title">
             <div [title]="movie.title">
                 {{movie.title}}
             </div>

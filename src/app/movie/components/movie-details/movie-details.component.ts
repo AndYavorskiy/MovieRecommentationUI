@@ -19,11 +19,11 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.movieService
-        .get(params.get('id'))
+        .get(+params.get('id'))
         .subscribe(data => this.movie = data);
 
       this.movieService
-        .recommendations(params.get('id'))
+        .recommendations(+params.get('id'))
         .subscribe(data => this.recommendations = data);
     });
   }

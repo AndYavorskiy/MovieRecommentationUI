@@ -11,7 +11,7 @@ import { MovieModel } from '../../models';
 export class MovieListComponent implements OnInit {
 
   private pageIndex = 0;
-  private pageSize = 10;
+  private pageSize = 20;
 
   public movies: MovieModel[] = [];
 

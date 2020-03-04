@@ -1,5 +1,5 @@
 <div class="details-background">
-    <img class="poster" [src]="movie.posterUrl" [alt]="movie.title">
+    <img class="poster" [src]="movie.posterPath" [alt]="movie.title">
 
     <div class="movie-info">
         <div class="title">
@@ -50,7 +50,7 @@
         <div class="card-wrapper" *ngFor="let recommendation of recommendations">
             <mat-card class="example-card" [routerLink]="['/movies', recommendation.id]">
 
-                <img mat-card-image [src]="recommendation.posterUrl" [alt]="recommendation.title">
+                <img mat-card-image [src]="recommendation.posterPath" [alt]="recommendation.title">
 
                 <div [title]="recommendation.title">
                     {{recommendation.title}}

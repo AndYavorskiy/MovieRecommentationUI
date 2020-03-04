@@ -3,5 +3,5 @@ export class MovieModel {
     title: string;
     overview: string;
     budget: number;
-    posterUrl: string;
+    posterPath: string;
 }
