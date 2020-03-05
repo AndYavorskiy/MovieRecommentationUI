@@ -1,4 +1,4 @@
-<div class="details-background">
+<div class="details-background" *ngIf="movie">
     <img class="poster" [src]="movie.posterPath" [alt]="movie.title">
 
     <div class="movie-info">
@@ -7,30 +7,56 @@
         </div>
 
         <div class="description">
-            <div>
+
+            <div *ngIf="movie.originalTitle">
+                <span> Original Title: </span>
+                <span> {{movie.originalTitle}} </span>
+            </div>
+
+            <div *ngIf="movie.releaseDate">
                 <span> Release date: </span>
-                <span> 2012 </span>
+                <span> {{movie.releaseDate | date}} </span>
             </div>
 
             <div>
                 <span> Rating: </span>
-                <span> 7.5 </span>
-                <span> 1.125 votes </span>
+                <span> {{movie.voteAverage}} ({{movie.voteCount}} votes) </span>
+            </div>
+
+            <div *ngIf="movie.budget">
+                <span> Budget: </span>
+                <span> {{movie.budget | currency}}</span>
+            </div>
+
+            <div *ngIf="movie.revenue">
+                <span> Revenue: </span>
+                <span> {{movie.revenue | currency}}</span>
+            </div>
+
+            <div *ngIf="movie.adult">
+                <span> Restrictions: </span>
+                <span> 18+ </span>
             </div>
 
             <div>
                 <span> Movie time: </span>
-                <span> 1h 30m </span>
+                <span> {{movie.runtime}} </span>
+                <span> min. </span>
             </div>
 
-            <div>
-                <span> Company: </span>
-                <span> Pixar Animation Studios </span>
+            <div *ngIf="movie.companies && movie.companies.length">
+                <span> {{movie.companies.length == 1 ? "Company" : "Companies"}}: </span>
+                <span> {{getNames( movie.companies)}} </span>
             </div>
 
-            <div>
-                <span> Ganers: </span>
-                <span> Triller, Action, Family </span>
+            <div *ngIf="movie.genres && movie.genres.length">
+                <span> {{movie.genres.length == 1 ? "Genre" : "Genres"}}: </span>
+                <span> {{getNames(movie.genres)}} </span>
+            </div>
+
+            <div *ngIf="movie.keywords && movie.keywords.length">
+                <span> {{movie.keywords.length == 1 ? "Keyword" : "Keywords"}}:</span>
+                <span> {{getNames(movie.keywords)}} </span>
             </div>
 
             <div>
@@ -39,6 +65,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <div class="recommendations-container ">

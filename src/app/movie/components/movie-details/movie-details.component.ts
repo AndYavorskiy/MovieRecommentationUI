@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MovieService } from '../../services';
 import { MovieModel } from '../../models';
+import { IdName } from '../../models/movie.model';
 
 @Component({
   selector: 'app-movie-details',
@@ -26,5 +27,9 @@ export class MovieDetailsComponent implements OnInit {
         .recommendations(+params.get('id'))
         .subscribe(data => this.recommendations = data);
     });
+  }
+
+  getNames(data: IdName[] ){
+    return data.map((x: { name: string; }) => x.name).join(", ");
   }
 }

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { HttpParamsBuilder } from 'src/app/shared/utilities';
 import { MovieModel } from '../models';
+import { ListData } from '../models/movie.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,13 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  public search(pageIndex: number, pageSize: number) {
+  public search(filter: string, pageIndex: number, pageSize: number) {
     const builder = new HttpParamsBuilder()
+      .append('filterText', filter)
       .append('pageIndex', pageIndex)
       .appendOptional('pageSize', pageSize);
 
-    return this.http.get<MovieModel[]>(`${this.baseUrl}`, { params: builder.params });
+    return this.http.get<ListData<MovieModel>>(`${this.baseUrl}`, { params: builder.params });
   }
 
   public get(id: number) {

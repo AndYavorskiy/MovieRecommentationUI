@@ -1,11 +1,24 @@
-<div class="movie-list-container">
-    <div class="card-wrapper" *ngFor="let movie of movies" [routerLink]="['.', movie.id]">
-        <mat-card class="example-card" [routerLink]="['/movies', movie.id]">
-
-            <img mat-card-image [src]="movie.posterPath" [alt]="movie.title">
-            <div [title]="movie.title">
-                {{movie.title}}
-            </div>
-        </mat-card>
+<div class="movie-list">
+    <div class="filters-container">
+        <mat-form-field class="search" appearance="outline">
+            <input matInput placeholder="Search movie" [formControl]="search">
+            <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
     </div>
+
+    <div class="movie-list-container">
+        <div class="card-wrapper" *ngFor="let movie of movies" [routerLink]="['.', movie.id]">
+            <mat-card class="example-card" [routerLink]="['/movies', movie.id]">
+
+                <img mat-card-image [src]="movie.posterPath" [alt]="movie.title">
+                <div [title]="movie.title">
+                    {{movie.title}}
+                </div>
+            </mat-card>
+        </div>
+    </div>
+
+    <mat-paginator [length]="totalCount" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="pageSizes"
+        (page)="onPaginatorChanges($event)">
+    </mat-paginator>
 </div>
