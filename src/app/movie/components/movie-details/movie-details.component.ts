@@ -12,6 +12,7 @@ import { IdName } from '../../models/movie.model';
 })
 export class MovieDetailsComponent implements OnInit {
 
+  public topSimilar = 15;
   public movie: MovieModel;
   public recommendations: MovieModel[];
 
@@ -24,12 +25,12 @@ export class MovieDetailsComponent implements OnInit {
         .subscribe(data => this.movie = data);
 
       this.movieService
-        .recommendations(+params.get('id'))
+        .recommendations(+params.get('id'), this.topSimilar)
         .subscribe(data => this.recommendations = data);
     });
   }
 
-  getNames(data: IdName[] ){
+  getNames(data: IdName[]) {
     return data.map((x: { name: string; }) => x.name).join(", ");
   }
 }

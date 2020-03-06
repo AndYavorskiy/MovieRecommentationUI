@@ -1,51 +1,94 @@
-.recommendations-container {
-  margin: 20px;
+.movie-details {
+  margin: 20px 0;
 
-  .recommendations-list {
-    display: flex;
-    flex-wrap: wrap;
+  @media only screen and (max-width: 600px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 
-    .card-wrapper {
-      width: 12.5%;
-    }
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
 
-    .example-card {
-      margin: 5px;
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
 
-      &:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        cursor: pointer;
+  .recommendations-container {
+    margin: 20px;
+
+    .recommendations-list {
+      display: flex;
+      flex-wrap: wrap;
+
+      .card-wrapper {
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+          width: 50%;
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) {
+          width: 33.3333%;
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+          width: 25%;
+        }
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+          width: 20%;
+        }
+
+        /* Extra large devices (large laptops and desktops, 1200px and up) */
+        @media only screen and (min-width: 1200px) {
+          width: 14.285%;
+        }
+      }
+
+      .example-card {
+        margin: 5px;
+
+        &:hover {
+          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+          cursor: pointer;
+        }
       }
     }
   }
-}
 
-.details-background {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px;
+  .details-background {
+    display: flex;
+    justify-content: space-around;
 
-  .poster {
-    width: 20%;
-  }
-
-  .movie-info {
-    width: 50%;
-    margin-top: 10px;
-
-    .title {
-      font-size: 1.7em;
-      line-height: 2.5em;
-      font-weight: bold;
-      color: #3f51b5;
+    .poster {
+      width: 20%;
     }
 
-    .description {
-      font-size: 1.1em;
+    .movie-info {
+      width: 50%;
+      margin-top: 10px;
 
-      div > span:first-child {
+      .title {
+        font-size: 1.7em;
+        line-height: 2.5em;
         font-weight: bold;
-        line-height: 2em;
+        color: #3f51b5;
+      }
+
+      .description {
+        font-size: 1.1em;
+
+        div > span:first-child {
+          font-weight: bold;
+          line-height: 2em;
+        }
       }
     }
   }

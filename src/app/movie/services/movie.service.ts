@@ -28,7 +28,11 @@ export class MovieService {
     return this.http.get<MovieModel>(`${this.baseUrl}/${id}`);
   }
 
-  public recommendations(id: number) {
-    return this.http.get<MovieModel[]>(`${this.baseUrl}/recommendations/${id}`);
+  public recommendations(id: number, top: number) {
+    const builder = new HttpParamsBuilder()
+      .append('top', top);
+
+
+    return this.http.get<MovieModel[]>(`${this.baseUrl}/recommendations/${id}`, { params: builder.params });
   }
 }

@@ -1,88 +1,89 @@
-<div class="details-background" *ngIf="movie">
-    <img class="poster" [src]="movie.posterPath" [alt]="movie.title">
+<div class="movie-details">
+    <div class="details-background" *ngIf="movie">
+        <img class="poster" [src]="movie.posterPath" [alt]="movie.title">
 
-    <div class="movie-info">
-        <div class="title">
-            {{movie.title}}
-        </div>
-
-        <div class="description">
-
-            <div *ngIf="movie.originalTitle">
-                <span> Original Title: </span>
-                <span> {{movie.originalTitle}} </span>
+        <div class="movie-info">
+            <div class="title">
+                {{movie.title}}
             </div>
 
-            <div *ngIf="movie.releaseDate">
-                <span> Release date: </span>
-                <span> {{movie.releaseDate | date}} </span>
-            </div>
+            <div class="description">
 
-            <div>
-                <span> Rating: </span>
-                <span> {{movie.voteAverage}} ({{movie.voteCount}} votes) </span>
-            </div>
+                <div *ngIf="movie.originalTitle">
+                    <span> Original Title: </span>
+                    <span> {{movie.originalTitle}} </span>
+                </div>
 
-            <div *ngIf="movie.budget">
-                <span> Budget: </span>
-                <span> {{movie.budget | currency}}</span>
-            </div>
+                <div *ngIf="movie.releaseDate">
+                    <span> Release date: </span>
+                    <span> {{movie.releaseDate | date}} </span>
+                </div>
 
-            <div *ngIf="movie.revenue">
-                <span> Revenue: </span>
-                <span> {{movie.revenue | currency}}</span>
-            </div>
+                <div>
+                    <span> Rating: </span>
+                    <span> {{movie.voteAverage}} ({{movie.voteCount}} votes) </span>
+                </div>
 
-            <div *ngIf="movie.adult">
-                <span> Restrictions: </span>
-                <span> 18+ </span>
-            </div>
+                <div *ngIf="movie.budget">
+                    <span> Budget: </span>
+                    <span> {{movie.budget | currency}}</span>
+                </div>
 
-            <div>
-                <span> Movie time: </span>
-                <span> {{movie.runtime}} </span>
-                <span> min. </span>
-            </div>
+                <div *ngIf="movie.revenue">
+                    <span> Revenue: </span>
+                    <span> {{movie.revenue | currency}}</span>
+                </div>
 
-            <div *ngIf="movie.companies && movie.companies.length">
-                <span> {{movie.companies.length == 1 ? "Company" : "Companies"}}: </span>
-                <span> {{getNames( movie.companies)}} </span>
-            </div>
+                <div *ngIf="movie.adult">
+                    <span> Restrictions: </span>
+                    <span> 18+ </span>
+                </div>
 
-            <div *ngIf="movie.genres && movie.genres.length">
-                <span> {{movie.genres.length == 1 ? "Genre" : "Genres"}}: </span>
-                <span> {{getNames(movie.genres)}} </span>
-            </div>
+                <div>
+                    <span> Movie time: </span>
+                    <span> {{movie.runtime}} </span>
+                    <span> min. </span>
+                </div>
 
-            <div *ngIf="movie.keywords && movie.keywords.length">
-                <span> {{movie.keywords.length == 1 ? "Keyword" : "Keywords"}}:</span>
-                <span> {{getNames(movie.keywords)}} </span>
-            </div>
+                <div *ngIf="movie.companies && movie.companies.length">
+                    <span> {{movie.companies.length == 1 ? "Company" : "Companies"}}: </span>
+                    <span> {{getNames( movie.companies)}} </span>
+                </div>
 
-            <div>
-                <span> Overview: </span>
-                <div> {{movie.overview}} </div>
+                <div *ngIf="movie.genres && movie.genres.length">
+                    <span> {{movie.genres.length == 1 ? "Genre" : "Genres"}}: </span>
+                    <span> {{getNames(movie.genres)}} </span>
+                </div>
+
+                <div *ngIf="movie.keywords && movie.keywords.length">
+                    <span> {{movie.keywords.length == 1 ? "Keyword" : "Keywords"}}:</span>
+                    <span> {{getNames(movie.keywords)}} </span>
+                </div>
+
+                <div>
+                    <span> Overview: </span>
+                    <div> {{movie.overview}} </div>
+                </div>
             </div>
         </div>
     </div>
 
-</div>
+    <div class="recommendations-container ">
+        <h2>
+            Recommendations
+        </h2>
 
-<div class="recommendations-container ">
-    <h2>
-        Recommendations
-    </h2>
+        <div class="recommendations-list ">
+            <div class="card-wrapper" *ngFor="let recommendation of recommendations">
+                <mat-card class="example-card" [routerLink]="['/movies', recommendation.id]">
 
-    <div class="recommendations-list ">
-        <div class="card-wrapper" *ngFor="let recommendation of recommendations">
-            <mat-card class="example-card" [routerLink]="['/movies', recommendation.id]">
+                    <img mat-card-image [src]="recommendation.posterPath" [alt]="recommendation.title">
 
-                <img mat-card-image [src]="recommendation.posterPath" [alt]="recommendation.title">
-
-                <div [title]="recommendation.title">
-                    {{recommendation.title}}
-                </div>
-            </mat-card>
+                    <div [title]="recommendation.title">
+                        {{recommendation.title}}
+                    </div>
+                </mat-card>
+            </div>
         </div>
     </div>
 </div>
