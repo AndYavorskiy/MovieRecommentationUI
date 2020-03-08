@@ -11,7 +11,7 @@
             <mat-card class="example-card" [routerLink]="['/movies', movie.id]">
                 <img mat-card-image [src]="movie.posterPath" [alt]="movie.title">
 
-                <div [title]="movie.title">
+                <div class="movie-title" [title]="movie.title">
                     {{movie.title}}
                 </div>
             </mat-card>
