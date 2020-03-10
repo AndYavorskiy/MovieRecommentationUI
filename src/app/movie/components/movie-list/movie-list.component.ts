@@ -2,9 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { MovieService } from '../../services';
 import { MovieModel } from '../../models';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { PageEvent } from '@angular/material/paginator';
+
+export interface ItemChecked {
+  id: number;
+  name: string;
+  isChecked: boolean;
+}
 
 @Component({
   selector: 'app-movie-list',
@@ -18,21 +24,23 @@ export class MovieListComponent implements OnInit {
   totalCount = 100;
   pageSize = this.pageSizes[1];
 
+  genres: ItemChecked[] = [];
   movies: MovieModel[] = [];
   search = new FormControl('');
 
   constructor(private readonly movieService: MovieService) { }
 
-  searchData() {
-    this.movieService
-      .search(this.search.value, this.pageIndex, this.pageSize)
-      .subscribe(data => {
-        this.movies = data.items;
-        this.totalCount = data.totalCount;
-      });
-  }
 
   ngOnInit() {
+    this.movieService.getGenres()
+      .subscribe(data => this.genres = data.map(x => {
+        return {
+          id: x.id,
+          name: x.name,
+          isChecked: false
+        } as ItemChecked;
+      }));
+
     this.searchData();
 
     this.search.valueChanges.pipe(
@@ -52,4 +60,23 @@ export class MovieListComponent implements OnInit {
 
     this.searchData();
   }
+
+  onCheckboxChange() {
+    this.searchData();
+  }
+
+  private searchData() {
+    const selectedGenres = this.genres
+    .filter(x => x.isChecked)
+    .map(x => x.id);
+console.log(selectedGenres);
+
+    this.movieService
+      .search(this.search.value, this.pageIndex, this.pageSize, selectedGenres)
+      .subscribe(data => {
+        this.movies = data.items;
+        this.totalCount = data.totalCount;
+      });
+  }
+
 }

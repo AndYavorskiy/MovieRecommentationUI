@@ -45,3 +45,8 @@ export class ListData<T>
     totalCount: number;
     items: T[];
 }
+
+export class GenreModel {
+    id: number;
+    name: string;
+}
