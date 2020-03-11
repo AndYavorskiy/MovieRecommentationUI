@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { HttpParamsBuilder } from 'src/app/shared/utilities';
-import { MovieModel } from '../models';
-import { ListData, GenreModel } from '../models/movie.model';
+import { MovieModel, ListData, GenreModel, MovieSearchFilterModel } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +14,10 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  public search(filter: string, pageIndex: number, pageSize: number, genres: number[]) {
-    return this.http.post<ListData<MovieModel>>(`${this.baseUrl}`, {
-      filterText: filter,
-      pageIndex: pageIndex,
-      pageSize: pageSize,
-      genres: genres
-    });
+  public search(movieSearchFilter: MovieSearchFilterModel) {
+    const builder = new HttpParamsBuilder(movieSearchFilter);
+
+    return this.http.get<ListData<MovieModel>>(`${this.baseUrl}`, { params: builder.params });
   }
 
   public get(id: number) {
@@ -31,7 +27,6 @@ export class MovieService {
   public recommendations(id: number, top: number) {
     const builder = new HttpParamsBuilder()
       .append('top', top);
-
 
     return this.http.get<MovieModel[]>(`${this.baseUrl}/recommendations/${id}`, { params: builder.params });
   }

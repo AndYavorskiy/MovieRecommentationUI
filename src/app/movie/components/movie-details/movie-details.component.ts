@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { MovieService } from '../../services';
-import { MovieModel } from '../../models';
-import { IdName } from '../../models/movie.model';
+import { MovieModel, IdName } from '../../models';
 
 @Component({
   selector: 'app-movie-details',

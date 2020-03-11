@@ -1,17 +1,23 @@
 .movie-list {
   margin: 20px 10%;
 
+  @media only screen and (max-width: 600px) {
+    margin: 20px 5%;
+  }
+
   .filters-container {
-    display: flex;
+    margin: 5px;
 
-    .search {
-      width: 100%;
-    }
+    .row-1 {
+      display: flex;
 
-    .filter-button {
-      width: 55px;
-      height: 55px;
-      margin: 0 auto;
+      .search {
+        width: 100%;
+      }
+
+      .filter-button {
+        margin: 8px;
+      }
     }
   }
 
@@ -20,27 +26,22 @@
     flex-wrap: wrap;
 
     .card-wrapper {
-      /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: 600px) {
         width: 100%;
       }
 
-      /* Small devices (portrait tablets and large phones, 600px and up) */
       @media only screen and (min-width: 600px) {
         width: 50%;
       }
 
-      /* Medium devices (landscape tablets, 768px and up) */
       @media only screen and (min-width: 768px) {
         width: 33.33%;
       }
 
-      /* Large devices (laptops/desktops, 992px and up) */
       @media only screen and (min-width: 992px) {
         width: 25%;
       }
 
-      /* Extra large devices (large laptops and desktops, 1200px and up) */
       @media only screen and (min-width: 1200px) {
         width: 20%;
       }

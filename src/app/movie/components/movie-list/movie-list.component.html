@@ -1,43 +1,66 @@
-<mat-sidenav-container class="example-sidenav-container">
+<mat-sidenav-container>
     <mat-sidenav #snav [mode]="'over'" position="end">
         <mat-nav-list>
             <a mat-list-item *ngFor="let genre of genres">
-                <mat-checkbox [(ngModel)]="genre.isChecked" (change)="onCheckboxChange()">{{genre.name}}</mat-checkbox>
+                <mat-checkbox color="primary" [(ngModel)]="genre.isChecked" (change)="searchData()">{{genre.name}}
+                </mat-checkbox>
             </a>
         </mat-nav-list>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content class="page-container">
         <div class="movie-list">
             <div class="filters-container">
-                <mat-form-field class="search" appearance="outline">
-                    <input matInput placeholder="Search movie" [formControl]="search">
-                    <mat-icon matPrefix>search</mat-icon>
-                </mat-form-field>
+                <div class="row-1">
+                    <mat-form-field class="search" appearance="outline">
+                        <mat-icon matPrefix>search</mat-icon>
+                        <input matInput placeholder="Search movie" [formControl]="search">
 
-                <button mat-icon-button class="filter-button" (click)="snav.toggle()">
-                    <mat-icon>filter_list</mat-icon>
-                </button>
-            </div>
+                        <button *ngIf="search.value.length" matSuffix mat-icon-button (click)="search.setValue('')">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </mat-form-field>
 
-            <div class="movie-list-container">
-                <div class="card-wrapper" *ngFor="let movie of movies" [routerLink]="['.', movie.id]">
-                    <mat-card class="example-card" [routerLink]="['/movies', movie.id]">
-                        <img mat-card-image [src]="movie.posterPath" [alt]="movie.title">
-
-                        <div class="movie-title" [title]="movie.title">
-                            {{movie.title}}
-                        </div>
-                    </mat-card>
+                    <button mat-icon-button class="filter-button" [matBadgeHidden]="!selectedGenres().length"
+                        [matBadge]="selectedGenres().length" (click)="snav.toggle()">
+                        <mat-icon>tune</mat-icon>
+                    </button>
                 </div>
+
+                <mat-chip-list>
+                    <mat-chip *ngFor="let genre of selectedGenres()" [removable]="true" color="primary"
+                        (removed)="unselectGenre(genre)">
+                        {{genre.name}}
+
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
             </div>
 
-            <mat-paginator *ngIf="totalCount" [length]="totalCount" [pageIndex]="pageIndex" [pageSize]="pageSize"
-                [pageSizeOptions]="pageSizes" (page)="onPaginatorChanges($event)">
-            </mat-paginator>
+            <div *ngIf="!isLoading">
+                <div class="movie-list-container">
+                    <div class="card-wrapper" *ngFor="let movie of movies" [routerLink]="['.', movie.id]">
+                        <mat-card class="example-card" [routerLink]="['/movies', movie.id]">
+                            <img mat-card-image [src]="movie.posterPath" [alt]="movie.title">
 
-            <div *ngIf="!totalCount">
+                            <div class="movie-title" [title]="movie.title">
+                                {{movie.title}}
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+
+                <mat-paginator *ngIf="totalCount" [length]="totalCount" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizes" (page)="onPaginatorChanges($event)">
+                </mat-paginator>
+            </div>
+
+            <div *ngIf="!totalCount && !isLoading">
                 No Movies Found
+            </div>
+
+            <div *ngIf="isLoading">
+                <mat-progress-spinner class="spiner" [mode]="'indeterminate'"> </mat-progress-spinner>
             </div>
         </div>
     </mat-sidenav-content>

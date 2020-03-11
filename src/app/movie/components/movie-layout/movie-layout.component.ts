@@ -5,11 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './movie-layout.component.html',
   styleUrls: ['./movie-layout.component.scss']
 })
-export class MovieLayoutComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class MovieLayoutComponent {
 }

@@ -1,3 +1,8 @@
+import { IdName } from './id-name.model';
+import { IsoName } from './iso-name.model';
+import { CharacterActorModel } from './character-actor.model';
+
+
 export class MovieModel {
     id: string;
     originalId: string;
@@ -23,30 +28,4 @@ export class MovieModel {
     cast: CharacterActorModel[];
     directors: string[];
     keywords: IdName[];
-}
-
-export class IdName {
-    id: number;
-    name: string;
-}
-
-export class CharacterActorModel {
-    character: string;
-    actorName: string;
-}
-
-export class IsoName {
-    iso: number;
-    name: string;
-}
-
-export class ListData<T>
-{
-    totalCount: number;
-    items: T[];
-}
-
-export class GenreModel {
-    id: number;
-    name: string;
 }

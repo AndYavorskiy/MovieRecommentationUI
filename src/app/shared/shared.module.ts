@@ -19,24 +19,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatDialogModule,
-    MatCardModule,
-    MatSelectModule,
-    MatAutocompleteModule
+    CommonModule
   ],
   exports: [
     MatFormFieldModule,
@@ -55,7 +46,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatPaginatorModule,
     MatSidenavModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatChipsModule,
+    MatBadgeModule
   ]
 })
 export class SharedModule {
