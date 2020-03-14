@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MovieService } from '../../services';
-import { MovieModel, MovieSearchFilterModel } from '../../models';
+import { MovieModel, MovieSearchFilterModel, ItemChecked } from '../../models';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, take } from 'rxjs/operators';
 import { PageEvent } from '@angular/material/paginator';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModelProperties } from 'src/app/shared/utilities';
+import { MatDialog } from '@angular/material/dialog';
+import { MovieFilterPopupComponent } from '../movie-filter-popup/movie-filter-popup.component';
 
-export interface ItemChecked {
-  id: number;
-  name: string;
-  isChecked: boolean;
-}
 
 @Component({
   selector: 'app-movie-list',
@@ -28,16 +25,18 @@ export class MovieListComponent implements OnInit {
   isLoading = false;
 
   genres: ItemChecked[] = [];
+  selectedGenres = () => this.genres.filter(x => x.isChecked);
   movies: MovieModel[] = [];
   search = new FormControl('');
 
-  selectedGenres = () => this.genres.filter(x => x.isChecked);
   filters = ModelProperties.propertiesOf<MovieSearchFilterModel>();
 
   constructor(
     private readonly movieService: MovieService,
     private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute) { }
+    private readonly activatedRoute: ActivatedRoute,
+    public dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.activatedRoute.queryParams.
@@ -92,7 +91,19 @@ export class MovieListComponent implements OnInit {
 
   unselectGenre(genre: ItemChecked) {
     genre.isChecked = false;
+
     this.searchData();
+  }
+
+  openFilters() {
+    const dialogRef = this.dialog.open(MovieFilterPopupComponent, {
+      maxWidth: '500px',
+      data: this.genres
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.searchData();
+    });
   }
 
   searchData() {

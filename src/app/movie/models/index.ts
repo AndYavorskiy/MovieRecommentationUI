@@ -5,3 +5,4 @@ export { IsoName } from './iso-name.model';
 export { ListData } from './list-data.model';
 export { MovieSearchFilterModel } from './movie-search-filter.model';
 export { MovieModel } from './movie.model';
+export { ItemChecked } from './items-checked.model';
