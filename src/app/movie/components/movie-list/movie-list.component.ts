@@ -18,7 +18,7 @@ import { MovieFilterPopupComponent } from '../movie-filter-popup/movie-filter-po
 })
 export class MovieListComponent implements OnInit {
 
-  pageSizes = [10, 15, 25, 100];
+  pageSizes = [10, 15, 25, 100, 1000];
   pageSize = this.pageSizes[1];
   pageIndex = 0;
   totalCount: number;
@@ -95,13 +95,24 @@ export class MovieListComponent implements OnInit {
     this.searchData();
   }
 
+  updateNoPoster(movie: MovieModel) {
+    console.log(movie);
+    movie.posterPath = 'assets/images/movie-placeholder.jpg';
+
+    this.movieService.setNoPoster(+movie.id)
+      .subscribe();
+  }
+
   openFilters() {
     const dialogRef = this.dialog.open(MovieFilterPopupComponent, {
       maxWidth: '500px',
       data: this.genres
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((data) => {
+      this.genres = data;
+      console.log(data);
+
       this.searchData();
     });
   }

@@ -1,11 +1,11 @@
 <div class="genre-container" mat-dialog-content>
-    <div class="genre-item" *ngFor="let genre of this.data">
+    <div class="genre-item" *ngFor="let genre of this.genres">
         <mat-checkbox color="primary" [(ngModel)]="genre.isChecked">{{genre.name}}
         </mat-checkbox>
     </div>
 </div>
 
-<div mat-dialog-actions>
+<div mat-dialog-actions [align]="'end'">
     <button mat-button (click)="clearFilters()">Clear All</button>
-    <button mat-button [mat-dialog-close]>Ok</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
 </div>

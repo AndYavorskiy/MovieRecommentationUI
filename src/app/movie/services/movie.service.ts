@@ -24,6 +24,10 @@ export class MovieService {
     return this.http.get<MovieModel>(`${this.baseUrl}/${id}`);
   }
 
+  public setNoPoster(id: number) {
+    return this.http.get<void>(`${this.baseUrl}/${id}/SetNoPoster`);
+  }
+
   public recommendations(id: number, top: number) {
     const builder = new HttpParamsBuilder()
       .append('top', top);
